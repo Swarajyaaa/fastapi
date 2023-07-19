@@ -11,7 +11,7 @@ async def root(request: str=Body(media_type="application/xml")):
         root=ET.fromstring(request)
     except Exception as e:
         return {"Error: ", str(e)}, None
-    s3_client=boto3.client('s3',region_name='ap-south-1', aws_access_key_id='AKIA47NKTFI3LI2FB3NV', aws_secret_access_key='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')
+    s3_client=boto3.client('s3')
     response=ET.tostring(root).decode()
     try:
         # to put request in s3
@@ -21,9 +21,7 @@ async def root(request: str=Body(media_type="application/xml")):
     except Exception as e:
         return {"Error": "no response"}
     
-@app.get("/")
-async def root():
-    return {"successfull": "working"}
+
     
     
 
